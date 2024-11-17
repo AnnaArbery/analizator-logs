@@ -1,0 +1,8 @@
+**/node_modules
+/mongodata
+*.psd
+*.doc
+*.docx
+*.zip
+*.rar
+*.env

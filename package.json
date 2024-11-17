@@ -1,0 +1,23 @@
+{
+  "name": "base-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon index.js --prefix server",
+    "client": "npm run dev --prefix client",
+    "db": "docker-compose up -d",
+    "startAll": "concurrently \"(npm run client)\" \"(npm run server )\" \"(npm run db)\"",
+    "start": "concurrently \"(npm run client)\" \"(npm run server )\"",
+    "setup": "npm i && npm i --prefix client && npm i --prefix server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+  }
+}

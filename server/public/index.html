@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML-страница с обычным содержмимы</title>
+</head>
+<body>
+	<h1>Обычная страница</h1>
+	<form action="" method="post">
+		<input type="text" name="name" value="Имя">
+		<input type="text" name="mail" value="nnn@mail.ru">
+		<button type="submit">Отправить</button>
+	</form>
+
+	<script>
+		document.querySelector('form').addEventListener('submit', e => {
+			e.preventDefault();
+
+			const data = new FormData(e.target);
+			// console.log(Object.fromEntries(data))
+
+			fetch('http://localhost:4444/send', {
+			  method: 'POST', 
+			  // body: data,
+			  body: JSON.stringify(Object.fromEntries(data)),
+			  headers: {
+			    'Content-type': 'application/json; charset=UTF-8',
+			  },
+			})
+			.then((response) => response.json())
+			.then(res => {
+			    console.log(res)
+			})
+
+		});
+	</script>
+</body>
+</html>
