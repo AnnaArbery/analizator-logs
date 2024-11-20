@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import * as readline from 'node:readline/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getLogServer } from './controllers/logControllers.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
@@ -27,12 +30,24 @@ app.get('/', function (req, res) {
   );
 });
 
-app.post('/send', (req, res) => {
-  console.log(req.body, req.url, 'req.body');
-  res.json({ ...req.body, link: req.url });
-});
+// app.post('/send', (req, res) => {
+//   console.log(req.body, req.url, 'req.body');
+//   res.json({ ...req.body, link: req.url });
+// });
 
-app.use('/static', express.static(__dirname + '/public'));
+// app.use('/static', express.static(__dirname + '/public'));
+
+// let getfile = readline.createInterface({
+//   input: fs.createReadStream('files/anna-arbery.ru.access.log'),
+// });
+
+// let lineno = 0;
+// myInterface.on('line', function (line) {
+//   lineno++;
+//   console.log('Line number ' + lineno + ': ' + line);
+// });
+
+app.post('/logserver', getLogServer);
 
 app.all('*', function (req, res) {
   res

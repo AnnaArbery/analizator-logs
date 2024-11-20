@@ -1,0 +1,99 @@
+[
+  {
+    "title": "IP",
+    "key": "ip",
+    "dataIndex": "ip",
+    "idth": 140
+  },
+  {
+    "title": "Время",
+    "dataIndex": "date",
+    "key": "date",
+    "width": 180
+  },
+  {
+    "title": "Ссылка",
+    "dataIndex": "url",
+    "key": "url"
+  },
+  {
+    "title": "Статус",
+    "dataIndex": "status",
+    "key": "status",
+    "width": 80,
+    "filters": [
+      {
+        "text": "200",
+        "value": 200
+      },
+      {
+        "text": "404",
+        "value": 404
+      },
+      {
+        "text": "301",
+        "value": 301
+      },
+      {
+        "text": "Другие",
+        "value": "Другие"
+      }
+    ]
+  },
+  {
+    "title": "Размер, B",
+    "dataIndex": "size",
+    "key": "size",
+    "width": 100
+  },
+  {
+    "title": "Метод",
+    "dataIndex": "method",
+    "key": "method",
+    "width": 80,
+    "filters": [
+      {
+        "text": "GET",
+        "value": "GET"
+      },
+      {
+        "text": "POST",
+        "value": "POST"
+      }
+    ]
+  },
+  {
+    "title": "Протокол",
+    "dataIndex": "http",
+    "key": "http",
+    "width": 100
+  },
+  {
+    "title": "Referers",
+    "dataIndex": "refers",
+    "key": "refers"
+  },
+  {
+    "title": "User Agent",
+    "dataIndex": "agent",
+    "key": "agent",
+    "filters": [
+      {
+        "text": "Googlebot",
+        "value": "Googlebot"
+      },
+      {
+        "text": "YandexBot",
+        "value": "YandexBot"
+      },
+      {
+        "text": "bingbot",
+        "value": "bingbot"
+      },
+      {
+        "text": "Боты",
+        "value": "bot/"
+      }
+    ]
+  }
+]
