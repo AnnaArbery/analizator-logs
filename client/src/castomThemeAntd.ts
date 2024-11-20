@@ -16,5 +16,8 @@ export default {
     Card: {
       colorBgContainer: '#E5E3D8',
     },
+    Input: {
+      colorBgContainer: 'rgba(255,255,255,.5)',
+    },
   },
 };

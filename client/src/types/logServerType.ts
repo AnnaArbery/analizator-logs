@@ -2,10 +2,11 @@ type logServerType = {
   date: number;
   http: string;
   ip: string;
-  link: string;
+  url: string;
   method: string;
   size: number;
-  agent: string;
   status: number;
+  refers: string;
+  agent: string;
 };
 export default logServerType;

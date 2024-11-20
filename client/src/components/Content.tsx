@@ -1,13 +1,14 @@
 // import { Table } from 'antd';
 
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Table from './Table/Table.tsx';
 // import columns from './Table/columns.ts';
 import logServerType from '../types/logServerType.ts';
-import { Card, Button, Input, Space } from 'antd';
+import { Card, Button, Input, Space, Divider } from 'antd';
 // import { Select, Input, Segmented, Space } from 'antd';
-import type { InputRef, TableColumnsType } from 'antd';
+import { InputRef, TableColumnsType, Checkbox } from 'antd';
 import Highlighter from 'react-highlight-words';
+import DropDownFilter from './Table/DropdownFilter.tsx';
 
 type ContentProps = {
   list: logServerType[];
@@ -131,10 +132,91 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     //   ),
   });
 
+  //
+  const getColumnCheckboxGroupFilterDropdown =
+    (onSearch: (value: string[]) => void, dataIndex) =>
+    (props: FilterDropdownProps) => {
+      const { setSelectedKeys, selectedKeys, confirm, clearFilters } = props;
+
+      const clear = () => {
+        setSelectedKeys([]);
+        onSearch([]);
+        clearFilters();
+      };
+
+      const onOk = () => {
+        onSearch(selectedKeys as string[]);
+        confirm();
+      };
+
+      return (
+        <DropDownFilter
+          dataIndex={dataIndex}
+          selectedKeys={selectedKeys[0]}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() =>
+            handleSearch(selectedKeys as string[], confirm, dataIndex)
+          }
+          clear={clear}
+          onOk={onOk}
+        />
+      );
+    };
+
+  const getTextFilterDropdown = (columnName: string) => {
+    return ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }: FilterDropdownProps) => (
+      <div
+        clearFilters={clearFilters}
+        showClearButton={selectedKeys && selectedKeys.length > 0}
+      >
+        <Input
+          placeholder={columnName}
+          // @ts-ignore
+          value={selectedKeys}
+          onChange={(e) => {
+            setSelectedKeys(e.target.value);
+            // setFiltersApplied(true)
+            confirm({ closeDropdown: false });
+          }}
+        />
+      </div>
+    );
+  };
+
+  //
+
   const columnsTitlesExtends: TableColumnsType<logServerType> = [
     {
       key: 'ip',
-      ...getColumnSearchProps('ip'),
+      onFilter: (value, record) =>
+        record['ip']
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      // ...getColumnSearchProps('ip'),
+      filterDropdown: getColumnCheckboxGroupFilterDropdown(
+        (prev) => prev,
+        'ip'
+      ),
+    },
+    {
+      key: 'url',
+      onFilter: (value, record) =>
+        record['url']
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      filterDropdown: getColumnCheckboxGroupFilterDropdown(
+        (prev) => prev,
+        'url'
+      ),
     },
     {
       key: 'date',
@@ -158,8 +240,8 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     {
       dataIndex: 'agent',
       key: 'agent',
-      onFilter: (value: any, record: logServerType) =>
-        record.agent.includes(value),
+      onFilter: (value, record: logServerType) =>
+        record.agent.includes(value as string),
     },
   ];
 
