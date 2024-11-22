@@ -10,9 +10,11 @@ type TableProps = {
 
 const Table = ({ data, columns }: TableProps) => {
   const [count, setCount] = useState(50);
+
   // @ts-ignore
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
+    // console.log('Table.tsx, filters', pagination, filters, sorter, extra);
+    console.log('Table.tsx, filters', JSON.stringify(filters));
   };
 
   return (

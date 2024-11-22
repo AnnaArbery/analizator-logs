@@ -3,13 +3,13 @@
     "title": "IP",
     "key": "ip",
     "dataIndex": "ip",
-    "idth": 140
+    "idth": 120
   },
   {
     "title": "Время",
     "dataIndex": "date",
     "key": "date",
-    "width": 180
+    "width": 140
   },
   {
     "title": "Ссылка",
@@ -20,7 +20,7 @@
     "title": "Статус",
     "dataIndex": "status",
     "key": "status",
-    "width": 80,
+    "width": 90,
     "filters": [
       {
         "text": "200",
@@ -44,13 +44,13 @@
     "title": "Размер, B",
     "dataIndex": "size",
     "key": "size",
-    "width": 100
+    "width": 115
   },
   {
     "title": "Метод",
     "dataIndex": "method",
     "key": "method",
-    "width": 80,
+    "width": 90,
     "filters": [
       {
         "text": "GET",
@@ -59,6 +59,10 @@
       {
         "text": "POST",
         "value": "POST"
+      },
+      {
+        "text": "Другие",
+        "value": "Другие"
       }
     ]
   },
@@ -92,7 +96,11 @@
       },
       {
         "text": "Боты",
-        "value": "bot/"
+        "value": "bot"
+      },
+      {
+        "text": "Не боты",
+        "value": "!bot"
       }
     ]
   }

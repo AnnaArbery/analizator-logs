@@ -1,103 +1,62 @@
-import { Button, Divider, Input, Space } from 'antd';
-import React from 'react';
+import { Button, Checkbox, Input } from 'antd';
+import React, { ChangeEvent } from 'react';
+import type { FilterDropdownProps } from 'antd/es/table/interface';
 
-export interface FilterConfirmProps {
-  closeDropdown: boolean;
-}
-
-export interface ColumnFilterItem {
-  text: React.ReactNode;
-  value: string | number | boolean;
-  children?: ColumnFilterItem[];
-}
-
-export interface FilterDropdownProps {
-  prefixCls: string;
-  setSelectedKeys: (selectedKeys: React.Key[]) => void;
+type DropDownFilterProps = Pick<FilterDropdownProps, 'filters'> & {
   selectedKeys: React.Key[];
-  confirm: (param?: FilterConfirmProps) => void;
-  clearFilters?: () => void;
-  filters?: ColumnFilterItem[];
-  visible: boolean;
-}
-
-// const DropdownFilter = ({dataIndex, onChange, selectedKeys, handleSearch, close, }) => {
-//   return (
-//     <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
-//     <Input
-//       ref={searchInput}
-//       placeholder={`Search ${dataIndex}`}
-//       value={selectedKeys[0]}
-//       onChange={(e) =>
-//         setSelectedKeys(e.target.value ? [e.target.value] : [])
-//       }
-//       onPressEnter={() =>
-//         handleSearch(selectedKeys as string[], confirm, dataIndex)
-//       }
-//       style={{ marginBottom: 8, display: 'block' }}
-//     />
-//     <Space>
-//       <Button
-//         type='primary'
-//         onClick={() =>
-//           handleSearch(selectedKeys as string[], confirm, dataIndex)
-//         }
-//         // icon={<SearchOutlined />}
-//         size='small'
-//         style={{ width: 90 }}
-//       >
-//         Search
-//       </Button>
-//       <Button
-//         onClick={() => clearFilters && handleReset(clearFilters)}
-//         size='small'
-//         style={{ width: 90 }}
-//       >
-//         Reset
-//       </Button>
-//       {/* <Button
-//         type='link'
-//         size='small'
-//         onClick={() => {
-//           confirm({ closeDropdown: false });
-//           setSearchText((selectedKeys as string[])[0]);
-//           setSearchedColumn(dataIndex);
-//         }}
-//       >
-//         Filter
-//       </Button> */}
-//       <Button
-//         type='link'
-//         size='small'
-//         onClick={() => {
-//           close();
-//         }}
-//       >
-//         close
-//       </Button>
-//     </Space>
-//   </div>
-//   );
-// };
+  dataIndex: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeCheckbox?: () => void;
+  onPressEnter: () => void;
+  clear: () => void;
+  onOk: () => void;
+};
 
 const DropDownFilter = ({
   dataIndex,
   selectedKeys,
+  filters = [],
   onChange,
+  onChangeCheckbox,
   onPressEnter,
   clear,
   onOk,
-}) => {
+}: DropDownFilterProps) => {
   return (
     <div onKeyDown={(e) => e.stopPropagation()}>
       <div className='ant-dropdown-menu'>
-        <Input
-          // ref={searchInput}
-          placeholder={`Поиск ${dataIndex}`}
-          value={selectedKeys}
-          onChange={onChange}
-          onPressEnter={onPressEnter}
-        />
+        <div
+          className='ant-dropdown-menu__input'
+          style={{
+            padding:
+              'var(--ant-dropdown-padding-block) 3px var(--ant-dropdown-padding-block) var(--ant-control-padding-horizontal)',
+          }}
+        >
+          <Input
+            placeholder={`Поиск по ${dataIndex}`}
+            value={selectedKeys[0]}
+            onChange={onChange}
+            onPressEnter={onPressEnter}
+          />
+        </div>
+
+        {!!filters.length && (
+          <Checkbox.Group
+            onChange={onChangeCheckbox}
+            value={selectedKeys}
+            style={{ display: 'flex', flexDirection: 'column' }}
+          >
+            {filters?.map((item) => (
+              <Checkbox
+                value={item.value}
+                key={item.value as string}
+                className='ant-dropdown-menu-item'
+              >
+                {item.text}
+              </Checkbox>
+            ))}
+          </Checkbox.Group>
+        )}
       </div>
 
       <div className='ant-table-filter-dropdown-btns'>
