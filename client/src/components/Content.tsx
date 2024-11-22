@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Table from './Table/Table.tsx';
 import logServerType from '../types/logServerType.ts';
 import { Card, Button, TableColumnsType } from 'antd';
@@ -13,6 +13,7 @@ type ContentProps = {
 type DataIndex = keyof logServerType;
 
 const Content = ({ list, columnsTitlesTable }: ContentProps) => {
+  const [countFilterd, setCountFiltered] = useState(0);
   let columns = columnsTitlesTable;
 
   const getColumnFilterDropdown =
@@ -107,22 +108,32 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   return (
     <div className='content'>
       <div className='grid'>
-        <Card
-          bordered={false}
-          style={{
-            marginBottom: '20px',
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Button
-            type='primary'
-            // onClick={() => setData((prev) => prev.slice(0, 55))}
-          >
-            Фильтровать
-          </Button>
-        </Card>
-        <Table data={list} columns={columns} />
+        <div className='tableSettings'>
+          <Card bordered={false}>
+            <div className='tableCount' style={{ marginRight: 'auto' }}>
+              {countFilterd !== 0 && countFilterd !== list.length && (
+                <>Выбрано {countFilterd} из </>
+              )}
+              {(countFilterd === 0 || countFilterd === list.length) && (
+                <>Всего строк </>
+              )}
+              {list.length}
+            </div>
+
+            <Button
+              type='primary'
+              // onClick={() => setData((prev) => prev.slice(0, 55))}
+            >
+              Сброс фильтров
+            </Button>
+          </Card>
+        </div>
+
+        <Table
+          data={list}
+          columns={columns}
+          setCountFiltered={setCountFiltered}
+        />
       </div>
     </div>
   );

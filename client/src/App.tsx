@@ -1,6 +1,6 @@
 import { ConfigProvider } from 'antd';
 import useFetch, { optionsType } from './hooks/useFetch';
-import 'antd/dist/reset.css';
+// import 'antd/dist/reset.css';
 import './styles/App.scss';
 // @ts-ignore
 import castomThemeAntd from './castomThemeAntd.ts';
