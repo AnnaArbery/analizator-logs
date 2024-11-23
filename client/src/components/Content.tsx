@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
-import Table from './Table/Table.tsx';
+import { Table } from 'antd';
 import logServerType from '../types/logServerType.ts';
 import { Card, Button, TableColumnsType } from 'antd';
-import DropDownFilter from './Table/DropDownFilter.tsx';
+import DropDownFilter from './DropdownFilter.tsx';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 
 type ContentProps = {
@@ -14,6 +14,10 @@ type DataIndex = keyof logServerType;
 
 const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   const [countFilterd, setCountFiltered] = useState(0);
+  const [filteredInfo, setFilteredInfo] = useState<{ [key: string]: string[] }>(
+    {}
+  );
+  const [count, setCount] = useState(50);
   let columns = columnsTitlesTable;
 
   const getColumnFilterDropdown =
@@ -46,9 +50,23 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
       );
     };
 
-  const columnsTitlesExtends: TableColumnsType<logServerType> = [
+  // @ts-ignore
+  const onChange = (pagination, filters, sorter, extra) => {
+    // console.log('Table.tsx, filters', pagination, filters, sorter, extra);
+    console.log('Table.tsx, filters', filters);
+    setCountFiltered(extra.currentDataSource.length);
+    setFilteredInfo(filters);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
+    setCountFiltered(0);
+  };
+
+  let columnsTitlesExtends: TableColumnsType<logServerType> = [
     {
       key: 'ip',
+      filteredValue: filteredInfo.ip || null,
       onFilter: (value, record) =>
         record['ip']
           .toString()
@@ -58,6 +76,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     },
     {
       key: 'url',
+      filteredValue: filteredInfo.url || null,
       onFilter: (value, record) =>
         record['url']
           .toString()
@@ -75,6 +94,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     },
     {
       key: 'status',
+      filteredValue: filteredInfo.status || null,
       onFilter: (value, record) => {
         if (value === 'Другие') return ![200, 404, 301].includes(record.status);
         return record.status === value;
@@ -82,6 +102,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     },
     {
       key: 'method',
+      filteredValue: filteredInfo.method || null,
       onFilter: (value, record) => record.method === value,
     },
     {
@@ -89,8 +110,8 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
       sorter: (a, b) => a.size - b.size,
     },
     {
-      dataIndex: 'agent',
       key: 'agent',
+      filteredValue: filteredInfo.agent || null,
       onFilter: (value, record: logServerType) => {
         value = value.toString();
         console.log(value);
@@ -104,6 +125,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     let idxInitCol = columns.findIndex((col) => col.key === item.key);
     columns[idxInitCol] = { ...columns[idxInitCol], ...item };
   });
+  columns = [...columns];
 
   return (
     <div className='content'>
@@ -120,19 +142,23 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
               {list.length}
             </div>
 
-            <Button
-              type='primary'
-              // onClick={() => setData((prev) => prev.slice(0, 55))}
-            >
+            <Button type='primary' onClick={clearFilters}>
               Сброс фильтров
             </Button>
           </Card>
         </div>
 
-        <Table
-          data={list}
+        <Table<logServerType>
+          dataSource={list}
           columns={columns}
-          setCountFiltered={setCountFiltered}
+          pagination={{
+            pageSizeOptions: ['30', '50', '100'],
+            pageSize: count,
+            onChange: (page, pageSize) => setCount(pageSize),
+          }}
+          scroll={{ y: 55 * 12 }}
+          bordered
+          onChange={onChange}
         />
       </div>
     </div>
