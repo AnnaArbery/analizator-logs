@@ -38,11 +38,8 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
             dataIndex={dataIndex}
             selectedKeys={selectedKeys}
             filters={filters}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
+            setSelectedKeys={setSelectedKeys}
             onPressEnter={onOk}
-            // onChangeCheckbox={(checkedValues: string[]) => setSelectedKeys(checkedValues)}
             clear={clear}
             onOk={onOk}
           />
@@ -53,7 +50,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   // @ts-ignore
   const onChange = (pagination, filters, sorter, extra) => {
     // console.log('Table.tsx, filters', pagination, filters, sorter, extra);
-    console.log('Table.tsx, filters', filters);
+    // console.log('Table.tsx, filters', filters);
     setCountFiltered(extra.currentDataSource.length);
     setFilteredInfo(filters);
   };
@@ -113,11 +110,12 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
       key: 'agent',
       filteredValue: filteredInfo.agent || null,
       onFilter: (value, record: logServerType) => {
-        value = value.toString();
-        console.log(value);
-        if (value[0] === '!') return !record.agent.includes(value.slice(1));
-        return record.agent.includes(value as string);
+        value = value.toString().toLowerCase();
+        if (value[0] === '!')
+          return !record.agent.toLowerCase().includes(value.slice(1));
+        return record.agent.toLowerCase().includes(value as string);
       },
+      filterDropdown: getColumnFilterDropdown('agent'),
     },
   ];
 

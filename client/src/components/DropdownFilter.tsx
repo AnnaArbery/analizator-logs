@@ -1,12 +1,11 @@
 import { Button, Checkbox, Input } from 'antd';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 
 type DropDownFilterProps = Pick<FilterDropdownProps, 'filters'> & {
-  selectedKeys: React.Key[];
   dataIndex: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeCheckbox?: () => void;
+  selectedKeys: React.Key[];
+  setSelectedKeys: FilterDropdownProps['setSelectedKeys'];
   onPressEnter: () => void;
   clear: () => void;
   onOk: () => void;
@@ -16,12 +15,33 @@ const DropDownFilter = ({
   dataIndex,
   selectedKeys,
   filters = [],
-  onChange,
-  onChangeCheckbox,
+  setSelectedKeys,
   onPressEnter,
   clear,
   onOk,
 }: DropDownFilterProps) => {
+  const [search, setSearch] = useState('');
+
+  const handlerChange = (value: string[] | string) => {
+    if (!Array.isArray(value)) {
+      const clearedOldInput = selectedKeys.filter((item) => item !== search);
+      setSelectedKeys(
+        value ? [...clearedOldInput, value] : [...clearedOldInput]
+      );
+      setSearch(value);
+    } else {
+      const nameFilters = filters.map(({ text }) => text);
+      const clearedOldCheck = selectedKeys.filter(
+        (item) => !nameFilters.includes(item.toString())
+      );
+      setSelectedKeys([...clearedOldCheck, ...value]);
+    }
+  };
+
+  const handlerClear = () => {
+    clear();
+    setSearch('');
+  };
   return (
     <div onKeyDown={(e) => e.stopPropagation()}>
       <div className='ant-dropdown-menu'>
@@ -34,16 +54,16 @@ const DropDownFilter = ({
         >
           <Input
             placeholder={`Поиск по ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={onChange}
+            value={search}
+            onChange={(e) => handlerChange(e.target.value)}
             onPressEnter={onPressEnter}
           />
         </div>
 
         {!!filters.length && (
           <Checkbox.Group
-            onChange={onChangeCheckbox}
-            value={selectedKeys}
+            onChange={handlerChange}
+            value={selectedKeys as string[]}
             style={{ display: 'flex', flexDirection: 'column' }}
           >
             {filters?.map((item) => (
@@ -62,7 +82,7 @@ const DropDownFilter = ({
       <div className='ant-table-filter-dropdown-btns'>
         <Button
           disabled={!selectedKeys?.length}
-          onClick={clear}
+          onClick={handlerClear}
           type='link'
           size='small'
         >
