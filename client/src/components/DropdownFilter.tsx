@@ -42,6 +42,7 @@ const DropDownFilter = ({
     clear();
     setSearch('');
   };
+
   return (
     <div onKeyDown={(e) => e.stopPropagation()}>
       <div className='ant-dropdown-menu'>
