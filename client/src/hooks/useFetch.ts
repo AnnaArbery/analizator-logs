@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
-
-export type optionsType = {
-  file?: string;
-  fields?: string[];
-};
+import { optionsType } from '../types/optionsType';
 
 const useFetch = <T extends []>(
   url: string,
-  options: optionsType = {}
+  options: Partial<optionsType> = {}
 ): [T, string] => {
   const [response, setResponse] = useState<T>([] as T);
   const [status, setStatus] = useState('loading');

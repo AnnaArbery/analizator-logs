@@ -92,6 +92,14 @@ const useColumnsTable = (
       onFilter: (value, record) => record.method === value,
     },
     {
+      key: 'refers',
+      filteredValue: filteredInfo.refers || null,
+      onFilter: (value, record) => {
+        if (value === 0) return record.refers === '';
+        return record.refers !== '';
+      },
+    },
+    {
       key: 'size',
       sorter: (a, b) => a.size - b.size,
     },

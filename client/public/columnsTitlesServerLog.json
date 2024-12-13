@@ -3,7 +3,7 @@
     "title": "IP",
     "key": "ip",
     "dataIndex": "ip",
-    "idth": 120
+    "width": 120
   },
   {
     "title": "Время",
@@ -75,7 +75,17 @@
   {
     "title": "Referers",
     "dataIndex": "refers",
-    "key": "refers"
+    "key": "refers",
+    "filters": [
+      {
+        "text": "Нет",
+        "value": 0
+      },
+      {
+        "text": "Есть",
+        "value": 1
+      }
+    ]
   },
   {
     "title": "User Agent",

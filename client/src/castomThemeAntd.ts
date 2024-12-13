@@ -19,5 +19,12 @@ export default {
     Input: {
       colorBgContainer: 'rgba(255,255,255,.5)',
     },
+    Radio: {
+      colorBgContainer: 'rgba(255,255,255,.5)',
+    },
+    Modal: {
+      contentBg: '#E5E3D8',
+      headerBg: '#E5E3D8',
+    },
   },
 };

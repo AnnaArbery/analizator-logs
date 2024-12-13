@@ -1,51 +1,31 @@
 import { ConfigProvider } from 'antd';
-import useFetch, { optionsType } from './hooks/useFetch';
-// import 'antd/dist/reset.css';
+import useFetch from './hooks/useFetch';
 import './styles/App.scss';
-// @ts-ignore
 import castomThemeAntd from './castomThemeAntd.ts';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Content from './components/Content';
 import { useState } from 'react';
-
-const logArb = [
-  'ip',
-  'dash',
-  'dash1',
-  'date',
-  'zone',
-  'method',
-  'url',
-  'http',
-  'status',
-  'size',
-  'refers',
-  'agent',
-];
-
-const initSettings = {
-  url: import.meta.env.VITE_URL_LOGSERVER,
-  fields: ['site', ...logArb],
-  file: 'ts40.ru-access_log.log',
-};
+import LogsContext from './context/logsContext.ts';
+import { optionsType } from './types/optionsType.ts';
+import { initLogSettings, logTypes } from './data/initialData.ts';
 
 function App() {
-  const [url] = useState(initSettings.url);
-  const [options] = useState<optionsType>({
-    file: initSettings.file,
-    fields: initSettings.fields,
-  });
-  const [logs] = useFetch(url, options) || [];
-  const [columnsTitlesTable] = useFetch('columnsTitlesServerLog.json') || [];
+  const [log, setLog] = useState<logTypes>('server');
+  const [options, setOptions] = useState<optionsType>(initLogSettings[log]);
+
+  const [logs] = useFetch(import.meta.env.VITE_URL_LOG, options) || [];
+  const [columnsTitlesTable] = useFetch(options.columns) || [];
 
   return (
     <ConfigProvider theme={castomThemeAntd}>
-      <div className='layout'>
-        <Header />
-        <Content list={logs} columnsTitlesTable={columnsTitlesTable} />
-        <Footer />
-      </div>
+      <LogsContext.Provider value={{ log, setLog, options, setOptions }}>
+        <div className='layout'>
+          <Header />
+          <Content list={logs} columnsTitlesTable={columnsTitlesTable} />
+          <Footer />
+        </div>
+      </LogsContext.Provider>
     </ConfigProvider>
   );
 }
