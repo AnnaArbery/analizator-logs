@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DropDownFilter from '../components/DropdownFilter.tsx';
 import logServerType from '../types/logServerType.ts';
 import { TableColumnsType } from 'antd';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
+import LogsContext from '../context/logsContext.ts';
 
 type DataIndex = keyof logServerType;
 type FilteredInfo = { [key: string]: string[] };
@@ -11,7 +12,6 @@ const getColumnFilterDropdown =
   (dataIndex: DataIndex) => (props: FilterDropdownProps) => {
     const { selectedKeys, setSelectedKeys, confirm, filters, clearFilters } =
       props;
-
     const clear = () => {
       setSelectedKeys([]);
       clearFilters?.();
@@ -34,7 +34,10 @@ const extendColumns = (
   columns: TableColumnsType<logServerType>,
   extendsColumns: TableColumnsType<logServerType>
 ) => {
-  const newColumns = [...columns];
+  const { options } = useContext(LogsContext);
+  const newColumns = columns.filter((item) =>
+    options.fields.includes(item?.key as string)
+  );
 
   extendsColumns.forEach((item) => {
     let idxInitCol = newColumns.findIndex((col) => col.key === item.key);
@@ -113,6 +116,16 @@ const useColumnsTable = (
         return record.agent.toLowerCase().includes(value as string);
       },
       filterDropdown: getColumnFilterDropdown('agent'),
+    },
+    {
+      key: 'process',
+      filteredValue: filteredInfo.process || null,
+      onFilter: (value, record) =>
+        record['process']
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      filterDropdown: getColumnFilterDropdown('process'),
     },
   ];
 

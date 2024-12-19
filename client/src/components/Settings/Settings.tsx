@@ -31,6 +31,7 @@ const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
             block
             options={logsList}
             defaultValue={type}
+            value={type}
             optionType='button'
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
@@ -43,11 +44,18 @@ const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
       key: '2',
       label: 'Поля лога',
       children: (
-        <ListFields
-          fields={fields}
-          setFields={setFields}
-          setNewFields={setNewFields}
-        />
+        <>
+          <Radio.Group
+            block
+            options={logsList}
+            defaultValue={type}
+            value={type}
+            optionType='button'
+            style={{ marginBottom: '10px' }}
+            onChange={(e) => setType(e.target.value)}
+          />
+          <ListFields fields={fields} setNewFields={setNewFields} />
+        </>
       ),
     },
   ];

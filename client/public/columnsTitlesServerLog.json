@@ -3,7 +3,7 @@
     "title": "IP",
     "key": "ip",
     "dataIndex": "ip",
-    "width": 120
+    "width": 140
   },
   {
     "title": "Время",
@@ -15,6 +15,26 @@
     "title": "Ссылка",
     "dataIndex": "url",
     "key": "url"
+  },
+  {
+    "title": "Action",
+    "dataIndex": "action",
+    "key": "action",
+    "width": 90,
+    "filters": [
+      {
+        "text": "Ban",
+        "value": "Ban"
+      },
+      {
+        "text": "Unban",
+        "value": "Unban"
+      },
+      {
+        "text": "Found",
+        "value": "Found"
+      }
+    ]
   },
   {
     "title": "Статус",
@@ -113,5 +133,20 @@
         "value": "!bot"
       }
     ]
+  },
+  {
+    "title": "Пользователь",
+    "dataIndex": "user",
+    "key": "user"
+  },
+  {
+    "title": "Процесс",
+    "dataIndex": "process",
+    "key": "process"
+  },
+  {
+    "title": "Текст",
+    "dataIndex": "txt",
+    "key": "txt"
   }
 ]

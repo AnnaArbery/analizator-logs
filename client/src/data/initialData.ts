@@ -23,7 +23,7 @@ export const initLogSettings = {
   server: {
     title: 'Серверные логи',
     fields: ['site', ...fieldsLogsServer],
-    file: 'ts40.ru-access_log.log',
+    file: 'site-access_log.log',
     columns: 'columnsTitlesServerLog.json',
   },
   fail2ban: {
@@ -58,13 +58,13 @@ export const initLogSettings = {
       'ip',
       'accepted',
       'url',
-      't1',
+      'txt',
       't2',
       't3',
       'mm',
       'user',
     ],
-    file: 'logsxray-zomro.txt',
+    file: 'xray-log.log',
     columns: 'columnsTitlesServerLog.json',
   },
 };

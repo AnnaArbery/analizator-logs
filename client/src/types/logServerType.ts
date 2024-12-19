@@ -8,5 +8,6 @@ type logServerType = {
   status: number;
   refers: string;
   agent: string;
+  process: string;
 };
 export default logServerType;
