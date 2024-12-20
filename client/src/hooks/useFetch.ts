@@ -25,7 +25,7 @@ const useFetch = <T extends []>(
         setStatus('error');
       }
     })();
-  }, [url]);
+  }, [url, options.file]);
 
   return [response, status];
 };

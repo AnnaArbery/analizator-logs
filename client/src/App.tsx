@@ -13,15 +13,16 @@ import { initLogSettings, logTypes } from './data/initialData.ts';
 function App() {
   const [log, setLog] = useState<logTypes>('server');
   const [options, setOptions] = useState<optionsType>(initLogSettings[log]);
+  const [columnsTitlesTable] = useFetch(options.columns) || [];
 
   const [logs] = useFetch(import.meta.env.VITE_URL_LOG, options) || [];
-  const [columnsTitlesTable] = useFetch(options.columns) || [];
 
   return (
     <ConfigProvider theme={castomThemeAntd}>
       <LogsContext.Provider value={{ log, setLog, options, setOptions }}>
         <div className='layout'>
-          <Header />
+          <Header title={options.title} />
+          {JSON.stringify(options)}
           <Content list={logs} columnsTitlesTable={columnsTitlesTable} />
           <Footer />
         </div>

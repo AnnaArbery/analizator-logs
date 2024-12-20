@@ -142,11 +142,28 @@
   {
     "title": "Процесс",
     "dataIndex": "process",
-    "key": "process"
+    "key": "process",
+    "width": 140
   },
   {
     "title": "Текст",
     "dataIndex": "txt",
     "key": "txt"
+  },
+  {
+    "title": "Тип",
+    "dataIndex": "type",
+    "key": "type",
+    "width": 140,
+    "filters": [
+      {
+        "text": "filter",
+        "value": "filter"
+      },
+      {
+        "text": "action",
+        "value": "action"
+      }
+    ]
   }
 ]

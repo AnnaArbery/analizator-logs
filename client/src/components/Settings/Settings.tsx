@@ -9,12 +9,14 @@ type SettingsProps = {
   setIsModalOpen: (isOpen: boolean) => void;
 };
 
+// type newFieldsProps = typeof initLogSettings['server'].fields;
+
 const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
   const { log, options, setLog, setOptions } = useContext(LogsContext);
   const [type, setType] = useState(log);
   const [file, setFile] = useState(options.file);
   const [fields, setFields] = useState(options.fields);
-  const [newFields, setNewFields] = useState({});
+  const [newFields, setNewFields] = useState<Record<string, string>>({});
 
   useEffect(() => {
     setFile(initLogSettings[type].file);
@@ -61,11 +63,21 @@ const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
   ];
 
   const handlerSave = () => {
-    console.log({
-      type,
-      file,
-      newFields,
+    const optionsNewFields = initLogSettings[type].fields.map((item) => {
+      if (newFields[item]) item = newFields[item];
+      return item;
     });
+    const newOptions = {
+      title: initLogSettings[type].title,
+      file,
+      fields: optionsNewFields,
+    };
+    console.log(newOptions, type);
+    // console.log(initLogSettings[type].file, );
+
+    setLog(type);
+    setOptions((prev) => ({ ...prev, ...newOptions }));
+    setIsModalOpen(false);
   };
 
   return (

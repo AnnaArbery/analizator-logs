@@ -12,6 +12,8 @@ export const getLogServer = async (req, res) => {
     title = '',
   } = req.body;
 
+  console.log(fields, title);
+
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const filepath = path.join(__dirname, `../files/${file}`);
   const lines = fs.readFileSync(filepath, 'utf8').split(/\r?\n/);
@@ -41,11 +43,11 @@ export const getLogServer = async (req, res) => {
 
       if (title === 'xray') {
         let {
-          data1,
-          data2,
-          data3,
-          data4 = '',
-          data5,
+          date,
+          date1,
+          date2,
+          date3 = '',
+          date4,
           server,
           accepted,
           t2,
@@ -57,10 +59,10 @@ export const getLogServer = async (req, res) => {
 
         let year = new Date().getFullYear();
         if (line.includes('from')) {
-          [year] = data4?.split('/');
+          [year] = date3?.split('/');
           res_xray.txt = `${res_xray.txt} ${t2} ${t3}`;
         }
-        res_xray.data = +new Date(`${data1} ${data2} ${year} ${data3}`);
+        res_xray.date = +new Date(`${date} ${date1} ${year} ${date2}`);
 
         if (res_xray.url) {
           res_xray.url = normalizeValue(res_xray.url, 'url-xray');
@@ -72,15 +74,14 @@ export const getLogServer = async (req, res) => {
           res_xray.process = normalizeValue(res_xray.process, 'process-xray');
         }
         res = { ...res_xray };
-      }
-
-      if (title === 'file2ban') {
-        let { data1, data2, af, pid, type, t, data3, data4, ...res_fail2ban } =
+      } else if (title === 'fail2ban') {
+        let { date, date1, af, pid, type, t, date2, date3, ...res_fail2ban } =
           res;
-        data2 = data2.split(',')[0];
+        date1 = date1.split(',')[0];
+        [, type] = af.split('.');
 
-        res_fail2ban.data = +new Date(`${data1} ${data2}`);
-
+        res_fail2ban.date = +new Date(`${date} ${date1}`);
+        res_fail2ban.type = type;
         res = { ...res_fail2ban };
       }
       acc.push({ key: idx, ...res });
@@ -88,5 +89,7 @@ export const getLogServer = async (req, res) => {
 
     return acc;
   }, []);
+
+  // console.log(logs);
   res.json(logs);
 };

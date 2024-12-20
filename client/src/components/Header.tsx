@@ -1,6 +1,7 @@
 import { Flex } from 'antd';
 import type { MenuProps } from 'antd';
-import { Button, Dropdown } from 'antd';
+import { useContext } from 'react';
+import LogsContext from '../context/logsContext';
 
 const items: MenuProps['items'] = [
   {
@@ -29,15 +30,15 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const Header = () => {
+const Header = ({ title }: { title: string }) => {
   return (
     <header>
       <div className='grid'>
         <Flex justify='space-between' align='center'>
           <h1>Анализатор логов</h1>
-          <Dropdown menu={{ items }} placement='bottomLeft'>
-            <Button>Серверные логи</Button>
-          </Dropdown>
+          <div className='ant-btn css-var-r0 ant-btn-default ant-btn-color-default ant-btn-variant-outlined header-button'>
+            {title}
+          </div>
         </Flex>
       </div>
     </header>

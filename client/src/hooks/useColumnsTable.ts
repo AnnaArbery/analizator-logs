@@ -34,10 +34,7 @@ const extendColumns = (
   columns: TableColumnsType<logServerType>,
   extendsColumns: TableColumnsType<logServerType>
 ) => {
-  const { options } = useContext(LogsContext);
-  const newColumns = columns.filter((item) =>
-    options.fields.includes(item?.key as string)
-  );
+  const newColumns = [...columns];
 
   extendsColumns.forEach((item) => {
     let idxInitCol = newColumns.findIndex((col) => col.key === item.key);
@@ -50,6 +47,7 @@ const extendColumns = (
 const useColumnsTable = (
   columnsTitlesTable: TableColumnsType<logServerType>
 ) => {
+  const { options } = useContext(LogsContext);
   const [filteredInfo, setFilteredInfo] = useState<FilteredInfo>({});
 
   let columnsTitlesExtends: TableColumnsType<logServerType> = [
@@ -127,9 +125,25 @@ const useColumnsTable = (
           .includes((value as string).toLowerCase()),
       filterDropdown: getColumnFilterDropdown('process'),
     },
+    {
+      key: 'user',
+      filteredValue: filteredInfo.user || null,
+      onFilter: (value, record) =>
+        record['user']
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      filterDropdown: getColumnFilterDropdown('user'),
+    },
   ];
 
   let columns = extendColumns(columnsTitlesTable, columnsTitlesExtends);
+
+  columns = columns.filter((item) =>
+    options.fields.includes(item?.key as string)
+  );
+
+  console.log(columns, 'useColumnsTable');
 
   return [columns, setFilteredInfo];
 };
