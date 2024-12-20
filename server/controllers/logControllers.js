@@ -12,8 +12,6 @@ export const getLogServer = async (req, res) => {
     title = '',
   } = req.body;
 
-  console.log(fields, title);
-
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const filepath = path.join(__dirname, `../files/${file}`);
   const lines = fs.readFileSync(filepath, 'utf8').split(/\r?\n/);
@@ -61,6 +59,10 @@ export const getLogServer = async (req, res) => {
         if (line.includes('from')) {
           [year] = date3?.split('/');
           res_xray.txt = `${res_xray.txt} ${t2} ${t3}`;
+        } else {
+          res_xray.user = '-';
+          res_xray.url = '-';
+          res_xray.ip = '-';
         }
         res_xray.date = +new Date(`${date} ${date1} ${year} ${date2}`);
 
@@ -90,6 +92,5 @@ export const getLogServer = async (req, res) => {
     return acc;
   }, []);
 
-  // console.log(logs);
   res.json(logs);
 };

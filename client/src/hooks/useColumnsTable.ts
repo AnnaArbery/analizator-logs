@@ -50,7 +50,7 @@ const useColumnsTable = (
   const { options } = useContext(LogsContext);
   const [filteredInfo, setFilteredInfo] = useState<FilteredInfo>({});
 
-  let columnsTitlesExtends: TableColumnsType<logServerType> = [
+  const columnsTitlesExtends: TableColumnsType<logServerType> = [
     {
       key: 'ip',
       filteredValue: filteredInfo.ip || null,
@@ -101,6 +101,16 @@ const useColumnsTable = (
       },
     },
     {
+      key: 'action',
+      filteredValue: filteredInfo.action || null,
+      onFilter: (value, record) => record.action === value,
+    },
+    {
+      key: 'type',
+      filteredValue: filteredInfo.type || null,
+      onFilter: (value, record) => record.type === value,
+    },
+    {
       key: 'size',
       sorter: (a, b) => a.size - b.size,
     },
@@ -127,7 +137,7 @@ const useColumnsTable = (
     },
     {
       key: 'user',
-      filteredValue: filteredInfo.user || null,
+      filteredValue: filteredInfo?.user || null,
       onFilter: (value, record) =>
         record['user']
           .toString()
@@ -142,8 +152,6 @@ const useColumnsTable = (
   columns = columns.filter((item) =>
     options.fields.includes(item?.key as string)
   );
-
-  console.log(columns, 'useColumnsTable');
 
   return [columns, setFilteredInfo];
 };

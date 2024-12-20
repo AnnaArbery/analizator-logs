@@ -22,7 +22,6 @@ function App() {
       <LogsContext.Provider value={{ log, setLog, options, setOptions }}>
         <div className='layout'>
           <Header title={options.title} />
-          {JSON.stringify(options)}
           <Content list={logs} columnsTitlesTable={columnsTitlesTable} />
           <Footer />
         </div>

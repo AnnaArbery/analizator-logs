@@ -10,5 +10,7 @@ type logServerType = {
   agent: string;
   process: string;
   user: string;
+  action: string;
+  type: string;
 };
 export default logServerType;

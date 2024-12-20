@@ -1,4 +1,4 @@
-import { Card, Button} from 'antd';
+import { Card, Button } from 'antd';
 import { useState } from 'react';
 import Settings from './Settings/Settings';
 
@@ -35,7 +35,11 @@ const Panel = ({ countList, countFiltered, clearFilters }: PanelProps) => {
           Сброс фильтров
         </Button>
       </Card>
-      <Settings isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Settings
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        clearFilters={clearFilters}
+      />
     </div>
   );
 };

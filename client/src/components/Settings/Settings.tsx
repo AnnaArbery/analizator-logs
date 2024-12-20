@@ -7,11 +7,16 @@ import ListFields from './ListFields';
 type SettingsProps = {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  clearFilters: () => void;
 };
 
 // type newFieldsProps = typeof initLogSettings['server'].fields;
 
-const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
+const Settings = ({
+  isModalOpen,
+  setIsModalOpen,
+  clearFilters,
+}: SettingsProps) => {
   const { log, options, setLog, setOptions } = useContext(LogsContext);
   const [type, setType] = useState(log);
   const [file, setFile] = useState(options.file);
@@ -20,7 +25,7 @@ const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
 
   useEffect(() => {
     setFile(initLogSettings[type].file);
-    setFields(initLogSettings[type].fields);
+    setFields([...initLogSettings[type].fields]);
   }, [type]);
 
   const items: TabsProps['items'] = [
@@ -72,6 +77,7 @@ const Settings = ({ isModalOpen, setIsModalOpen }: SettingsProps) => {
       file,
       fields: optionsNewFields,
     };
+    clearFilters();
     console.log(newOptions, type);
     // console.log(initLogSettings[type].file, );
 
