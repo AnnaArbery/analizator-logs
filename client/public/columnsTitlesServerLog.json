@@ -1,25 +1,17 @@
-[
-  {
+{
+  "ip": {
     "title": "IP",
-    "key": "ip",
-    "dataIndex": "ip",
     "width": 140
   },
-  {
+  "date": {
     "title": "Время",
-    "dataIndex": "date",
-    "key": "date",
     "width": 140
   },
-  {
-    "title": "Ссылка",
-    "dataIndex": "url",
-    "key": "url"
+  "url": {
+    "title": "Ссылка"
   },
-  {
+  "action": {
     "title": "Action",
-    "dataIndex": "action",
-    "key": "action",
     "width": 90,
     "filters": [
       {
@@ -36,10 +28,8 @@
       }
     ]
   },
-  {
+  "status": {
     "title": "Статус",
-    "dataIndex": "status",
-    "key": "status",
     "width": 90,
     "filters": [
       {
@@ -60,16 +50,12 @@
       }
     ]
   },
-  {
+  "size": {
     "title": "Размер, B",
-    "dataIndex": "size",
-    "key": "size",
     "width": 115
   },
-  {
+  "method": {
     "title": "Метод",
-    "dataIndex": "method",
-    "key": "method",
     "width": 90,
     "filters": [
       {
@@ -86,16 +72,12 @@
       }
     ]
   },
-  {
+  "http": {
     "title": "Протокол",
-    "dataIndex": "http",
-    "key": "http",
     "width": 100
   },
-  {
+  "refers": {
     "title": "Referers",
-    "dataIndex": "refers",
-    "key": "refers",
     "filters": [
       {
         "text": "Нет",
@@ -107,10 +89,8 @@
       }
     ]
   },
-  {
+  "agent": {
     "title": "User Agent",
-    "dataIndex": "agent",
-    "key": "agent",
     "filters": [
       {
         "text": "Googlebot",
@@ -134,27 +114,18 @@
       }
     ]
   },
-  {
-    "title": "Пользователь",
-    "dataIndex": "user",
-    "key": "user"
+  "user": {
+    "title": "Пользователь"
   },
-  {
+  "process": {
     "title": "Процесс",
-    "dataIndex": "process",
-    "key": "process",
     "width": 140
   },
-  {
-    "title": "Текст",
-    "dataIndex": "txt",
-    "key": "txt"
+  "txt": {
+    "title": "Текст"
   },
-  {
+  "type": {
     "title": "Тип",
-    "dataIndex": "type",
-    "key": "type",
-    "width": 140,
     "filters": [
       {
         "text": "filter",
@@ -166,4 +137,4 @@
       }
     ]
   }
-]
+}

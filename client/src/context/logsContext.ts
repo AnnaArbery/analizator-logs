@@ -7,6 +7,8 @@ type logsContext = {
   setLog: (log: logTypes) => void;
   options: optionsType;
   setOptions: (options: optionsType) => void;
+  namesColumns: string[];
+  setNamesColumns: (columns: string[]) => void;
 };
 
 const contextDefaultvalue: logsContext = {
@@ -15,10 +17,12 @@ const contextDefaultvalue: logsContext = {
     title: '',
     fields: [],
     file: '',
-    columns: ''
+    columns: '',
   },
+  namesColumns: [],
   setLog: () => {},
   setOptions: () => {},
+  setNamesColumns: () => {},
 };
 
 const LogsContext = createContext<logsContext>(contextDefaultvalue);

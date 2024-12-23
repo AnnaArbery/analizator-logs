@@ -47,7 +47,7 @@ const extendColumns = (
 const useColumnsTable = (
   columnsTitlesTable: TableColumnsType<logServerType>
 ) => {
-  const { options } = useContext(LogsContext);
+  const { options, namesColumns } = useContext(LogsContext);
   const [filteredInfo, setFilteredInfo] = useState<FilteredInfo>({});
 
   const columnsTitlesExtends: TableColumnsType<logServerType> = [
@@ -146,6 +146,18 @@ const useColumnsTable = (
       filterDropdown: getColumnFilterDropdown('user'),
     },
   ];
+
+  // console.log(namesColumns);
+
+  columnsTitlesTable = namesColumns.map((item) => {
+    return {
+      dataIndex: item,
+      key: item,
+      ...(columnsTitlesTable[
+        item as keyof typeof columnsTitlesTable
+      ] as object),
+    };
+  });
 
   let columns = extendColumns(columnsTitlesTable, columnsTitlesExtends);
 

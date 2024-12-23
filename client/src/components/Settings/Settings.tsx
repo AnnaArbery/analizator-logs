@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import LogsContext from '../../context/logsContext';
 import { logsList, initLogSettings } from '../../data/initialData';
 import ListFields from './ListFields';
+import ListColumns from './ListColumns';
 
 type SettingsProps = {
   isModalOpen: boolean;
@@ -10,23 +11,25 @@ type SettingsProps = {
   clearFilters: () => void;
 };
 
-// type newFieldsProps = typeof initLogSettings['server'].fields;
-
 const Settings = ({
   isModalOpen,
   setIsModalOpen,
   clearFilters,
 }: SettingsProps) => {
-  const { log, options, setLog, setOptions } = useContext(LogsContext);
+  const { log, options, setLog, setOptions, namesColumns } =
+    useContext(LogsContext);
   const [type, setType] = useState(log);
   const [file, setFile] = useState(options.file);
   const [fields, setFields] = useState(options.fields);
+  const [columns, setColumns] = useState(namesColumns);
   const [newFields, setNewFields] = useState<Record<string, string>>({});
 
   useEffect(() => {
     setFile(initLogSettings[type].file);
     setFields([...initLogSettings[type].fields]);
   }, [type]);
+
+  console.log(namesColumns);
 
   const items: TabsProps['items'] = [
     {
@@ -49,7 +52,7 @@ const Settings = ({
     },
     {
       key: '2',
-      label: 'Поля лога',
+      label: 'Поля файла',
       children: (
         <>
           <Radio.Group
@@ -62,6 +65,24 @@ const Settings = ({
             onChange={(e) => setType(e.target.value)}
           />
           <ListFields fields={fields} setNewFields={setNewFields} />
+        </>
+      ),
+    },
+    {
+      key: '3',
+      label: 'Поля таблицы',
+      children: (
+        <>
+          <Radio.Group
+            block
+            options={logsList}
+            defaultValue={type}
+            value={type}
+            optionType='button'
+            style={{ marginBottom: '10px' }}
+            onChange={(e) => setType(e.target.value)}
+          />
+          <ListColumns columns={columns} setColumns={setColumns} />
         </>
       ),
     },
