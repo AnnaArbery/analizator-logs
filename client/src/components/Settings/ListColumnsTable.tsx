@@ -5,13 +5,17 @@ import { SortableContext } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
-type ListColumnsProps = {
+type ListColumnsTableProps = {
   columns: string[];
   setColumns: (cb: (value: string[]) => string[]) => void;
   fieldsFile: string[];
 };
 
-const ListColumns = ({ columns, setColumns, fieldsFile }: ListColumnsProps) => {
+const ListColumnsTable = ({
+  columns,
+  setColumns,
+  fieldsFile,
+}: ListColumnsTableProps) => {
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
       setColumns((prev) => {
@@ -77,4 +81,4 @@ const ListItem = (props: { item: string; style?: Record<string, string> }) => {
   );
 };
 
-export default ListColumns;
+export default ListColumnsTable;

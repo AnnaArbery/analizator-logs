@@ -2,8 +2,8 @@ import { Button, Input, Modal, Radio, Tabs, TabsProps } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import LogsContext from '../../context/logsContext';
 import { logsList, initLogSettings } from '../../data/initialData';
-import ListFields from './ListFields';
-import ListColumns from './ListColumns';
+import ListColumnsFile from './ListColumnsFile';
+import ListColumnsTable from './ListColumnsTable';
 
 type SettingsProps = {
   isModalOpen: boolean;
@@ -66,7 +66,7 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <ListFields fields={fields} setNewFields={setNewFields} />
+          <ListColumnsFile fields={fields} setNewFields={setNewFields} />
         </>
       ),
     },
@@ -84,7 +84,7 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <ListColumns
+          <ListColumnsTable
             columns={columns}
             setColumns={setColumns}
             fieldsFile={fields}
