@@ -39,10 +39,6 @@ footer {
   cursor: default;
 }
 
-.tableCount {
-  // position: relative;
-  // top: -40px;
-}
 
 .tableSettings {
   margin-bottom: 20px;
@@ -51,13 +47,6 @@ footer {
     display: flex;
     align-items: center;
   }
-
-  // 
-  // padding: var(--ant-padding-lg);
-  // border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
-  // box-shadow: var(--ant-box-shadow-tertiary);
-  // margin-bottom: 20px;
-  // background: var(--ant-color-bg-container)
 }
 
 * {
@@ -75,4 +64,8 @@ footer {
 *::-webkit-scrollbar-thumb {
   background-color: rgba(112, 128, 144, 0.5);
   border-radius: 11px;
+}
+
+.ant-list-item {
+  background-color: rgba(255, 255, 255, 0.5);
 }

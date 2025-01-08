@@ -16,12 +16,12 @@ const Settings = ({
   setIsModalOpen,
   clearFilters,
 }: SettingsProps) => {
-  const { log, options, setLog, setOptions, namesColumns } =
+  const { log, options, setLog, setOptions, namesColumns, setNamesColumns } =
     useContext(LogsContext);
   const [type, setType] = useState(log);
   const [file, setFile] = useState(options.file);
   const [fields, setFields] = useState(options.fields);
-  const [columns, setColumns] = useState(namesColumns);
+  const [columns, setColumns] = useState<string[]>([]);
   const [newFields, setNewFields] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -29,7 +29,9 @@ const Settings = ({
     setFields([...initLogSettings[type].fields]);
   }, [type]);
 
-  console.log(namesColumns);
+  useEffect(() => {
+    setColumns(namesColumns);
+  }, [namesColumns]);
 
   const items: TabsProps['items'] = [
     {
@@ -82,7 +84,11 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <ListColumns columns={columns} setColumns={setColumns} />
+          <ListColumns
+            columns={columns}
+            setColumns={setColumns}
+            fieldsFile={fields}
+          />
         </>
       ),
     },
@@ -99,11 +105,10 @@ const Settings = ({
       fields: optionsNewFields,
     };
     clearFilters();
-    console.log(newOptions, type);
-    // console.log(initLogSettings[type].file, );
-
     setLog(type);
     setOptions((prev) => ({ ...prev, ...newOptions }));
+
+    setNamesColumns([...columns]);
     setIsModalOpen(false);
   };
 
