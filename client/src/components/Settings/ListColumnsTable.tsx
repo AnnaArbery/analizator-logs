@@ -1,7 +1,6 @@
-import { arrayMove, useSortable } from '@dnd-kit/sortable';
 import { List } from 'antd';
+import { arrayMove, useSortable, SortableContext } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
-import { SortableContext } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
@@ -17,14 +16,14 @@ const ListColumnsTable = ({
   fieldsFile,
 }: ListColumnsTableProps) => {
   const onDragEnd = ({ active, over }: DragEndEvent) => {
-    if (active.id !== over?.id) {
-      setColumns((prev) => {
-        const activeIndex = prev.findIndex((name) => name === active.id);
-        const overIndex = prev.findIndex((name) => name === over?.id);
+    if (active.id === over?.id || !over?.id) return;
 
-        return arrayMove(prev, activeIndex, overIndex);
-      });
-    }
+    setColumns((prev) => {
+      const activeIndex = prev.findIndex((name) => name === active.id);
+      const overIndex = prev.findIndex((name) => name === over?.id);
+
+      return arrayMove(prev, activeIndex, overIndex);
+    });
   };
 
   return (

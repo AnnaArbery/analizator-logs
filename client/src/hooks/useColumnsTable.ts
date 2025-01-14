@@ -96,8 +96,8 @@ const useColumnsTable = (
       key: 'refers',
       filteredValue: filteredInfo.refers || null,
       onFilter: (value, record) => {
-        if (value === 0) return record.refers === '';
-        return record.refers !== '';
+        if (value === 0) return record.refers === '-';
+        return record.refers !== '-';
       },
     },
     {
@@ -146,8 +146,6 @@ const useColumnsTable = (
       filterDropdown: getColumnFilterDropdown('user'),
     },
   ];
-
-  // console.log(namesColumns);
 
   columnsTitlesTable = namesColumns.map((item) => {
     return {

@@ -11,6 +11,7 @@ const useFetch = <T extends []>(
   useEffect(() => {
     (async function fetchData() {
       try {
+        console.log(options.fields);
         const res = await fetch(url, {
           method: 'POST',
           body: JSON.stringify(options),
@@ -25,7 +26,7 @@ const useFetch = <T extends []>(
         setStatus('error');
       }
     })();
-  }, [url, options.file]);
+  }, [url, options.file, options.fields]);
 
   return [response, status];
 };

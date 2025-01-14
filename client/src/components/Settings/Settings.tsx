@@ -33,6 +33,36 @@ const Settings = ({
     setColumns(namesColumns);
   }, [namesColumns]);
 
+  const handlerAddColumn = (value: string) => {
+    setFields((prev) => [...prev, value]);
+  };
+
+  const handlerDelColumn = (value: string) => {
+    console.log(value);
+    setFields((prev) => prev.filter((item) => item !== value));
+  };
+
+  const handlerSave = () => {
+    const optionsNewFields = fields.map((item) => {
+      if (newFields[item]) item = newFields[item];
+      return item;
+    });
+
+    console.log(optionsNewFields, fields, 'optionsNewFields');
+    const newOptions = {
+      title: initLogSettings[type].title,
+      file,
+      fields: optionsNewFields,
+    };
+    clearFilters();
+    setLog(type);
+    setOptions((prev) => ({ ...prev, ...newOptions }));
+    // setOptions({ ...options, ...newOptions });
+
+    setNamesColumns([...columns]);
+    setIsModalOpen(false);
+  };
+
   const items: TabsProps['items'] = [
     {
       key: '1',
@@ -66,7 +96,13 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <ListColumnsFile fields={fields} setNewFields={setNewFields} />
+          <ListColumnsFile
+            fields={fields}
+            setFields={setFields}
+            setNewFields={setNewFields}
+            handlerAddColumn={handlerAddColumn}
+            handlerDelColumn={handlerDelColumn}
+          />
         </>
       ),
     },
@@ -93,24 +129,6 @@ const Settings = ({
       ),
     },
   ];
-
-  const handlerSave = () => {
-    const optionsNewFields = initLogSettings[type].fields.map((item) => {
-      if (newFields[item]) item = newFields[item];
-      return item;
-    });
-    const newOptions = {
-      title: initLogSettings[type].title,
-      file,
-      fields: optionsNewFields,
-    };
-    clearFilters();
-    setLog(type);
-    setOptions((prev) => ({ ...prev, ...newOptions }));
-
-    setNamesColumns([...columns]);
-    setIsModalOpen(false);
-  };
 
   return (
     <Modal

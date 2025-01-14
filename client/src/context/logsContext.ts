@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { optionsType } from '../types/optionsType';
 import { logTypes } from '../data/initialData.ts';
 
-type logsContext = {
+export type logsContext = {
   log: logTypes;
   setLog: (log: logTypes) => void;
   options: optionsType;
