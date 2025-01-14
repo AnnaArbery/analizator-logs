@@ -47,7 +47,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
           pagination={{
             pageSizeOptions: ['30', '50', '100'],
             pageSize: count,
-            onChange: (page, pageSize) => setCount(pageSize),
+            onChange: (_, pageSize) => setCount(pageSize),
           }}
           scroll={{ y: 55 * 12 }}
           bordered

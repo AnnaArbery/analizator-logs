@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { optionsType } from '../types/optionsType';
 
-const useFetchLog = <T extends []>(
+const useFetch = <T extends []>(
   url: string,
   options: Partial<optionsType> = {}
 ): [T, string] => {
@@ -25,9 +25,9 @@ const useFetchLog = <T extends []>(
         setStatus('error');
       }
     })();
-  }, [url]);
+  }, [url, options.file, options.fields]);
 
   return [response, status];
 };
 
-export default useFetchLog;
+export default useFetch;

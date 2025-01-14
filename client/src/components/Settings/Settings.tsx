@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Radio, Tabs, TabsProps } from 'antd';
+import { Button, Flex, Input, Modal, Radio, Tabs, TabsProps } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import LogsContext from '../../context/logsContext';
 import { logsList, initLogSettings } from '../../data/initialData';
@@ -23,6 +23,7 @@ const Settings = ({
   const [fields, setFields] = useState(options.fields);
   const [columns, setColumns] = useState<string[]>([]);
   const [newFields, setNewFields] = useState<Record<string, string>>({});
+  const [initialNamesColumns, setInitialNamesColumns] = useState<string[]>([]);
 
   useEffect(() => {
     setFile(initLogSettings[type].file);
@@ -30,6 +31,9 @@ const Settings = ({
   }, [type]);
 
   useEffect(() => {
+    if (!columns.length) {
+      setInitialNamesColumns(namesColumns);
+    }
     setColumns(namesColumns);
   }, [namesColumns]);
 
@@ -38,7 +42,6 @@ const Settings = ({
   };
 
   const handlerDelColumn = (value: string) => {
-    console.log(value);
     setFields((prev) => prev.filter((item) => item !== value));
   };
 
@@ -48,19 +51,31 @@ const Settings = ({
       return item;
     });
 
-    console.log(optionsNewFields, fields, 'optionsNewFields');
     const newOptions = {
       title: initLogSettings[type].title,
       file,
       fields: optionsNewFields,
     };
-    clearFilters();
-    setLog(type);
+
+    // @ts-ignore
     setOptions((prev) => ({ ...prev, ...newOptions }));
     // setOptions({ ...options, ...newOptions });
+    setNewFields({});
 
+    setLog(type);
     setNamesColumns([...columns]);
+    clearFilters();
     setIsModalOpen(false);
+  };
+
+  const handlerReset = () => {
+    setOptions(initLogSettings[type]);
+    setFields(initLogSettings[type].fields);
+    setFile(initLogSettings[type].file);
+    setColumns([...initialNamesColumns]);
+    setNamesColumns([...initialNamesColumns]);
+    setNewFields({});
+    clearFilters();
   };
 
   const items: TabsProps['items'] = [
@@ -78,7 +93,13 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <Input value={file} onChange={(e) => setFile(e.target.value)} />
+          <Input
+            value={file}
+            onChange={(e) => {
+              if (e.target.value === '') return;
+              setFile(e.target.value);
+            }}
+          />
         </>
       ),
     },
@@ -138,13 +159,14 @@ const Settings = ({
       footer={null}
     >
       <Tabs defaultActiveKey='1' items={items} />
-      <Button
-        type='primary'
-        style={{ marginTop: '20px' }}
-        onClick={handlerSave}
-      >
-        Сохранить
-      </Button>
+      <Flex justify='space-between' style={{ marginTop: '20px' }}>
+        <Button type='primary' onClick={handlerSave}>
+          Сохранить
+        </Button>
+        <Button type='default' onClick={handlerReset}>
+          Сброс
+        </Button>
+      </Flex>
     </Modal>
   );
 };

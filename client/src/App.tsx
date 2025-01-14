@@ -1,5 +1,6 @@
 import { ConfigProvider } from 'antd';
 import useFetch from './hooks/useFetch';
+import useFetchLog from './hooks/useFetchLog';
 import castomThemeAntd from './castomThemeAntd.ts';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -16,7 +17,7 @@ function App() {
   const [namesColumns, setNamesColumns] = useState<string[]>([]);
   const [columnsTitlesTable] = useFetch(options.columns) || [];
 
-  const [logs] = useFetch(import.meta.env.VITE_URL_LOG, options) || [];
+  const [logs] = useFetchLog(import.meta.env.VITE_URL_LOG, options) || [];
 
   useEffect(() => {
     const namesColumns = Object.keys(columnsTitlesTable);
