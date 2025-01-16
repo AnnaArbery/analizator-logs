@@ -55,7 +55,7 @@ export const getLogServer = async (req, res) => {
           ...res_xray
         } = res;
 
-        let year = new Date().getFullYear();
+        let year = new Date().getFullYear(); //если года не существует - не корректный текущий
         if (line.includes('from')) {
           [year] = date3?.split('/');
           res_xray.txt = `${res_xray.txt} ${t2} ${t3}`;
@@ -79,6 +79,11 @@ export const getLogServer = async (req, res) => {
       } else if (title === 'fail2ban') {
         let { date, date1, af, pid, type, t, date2, date3, ...res_fail2ban } =
           res;
+
+        if (line.includes('already banned')) {
+          res_fail2ban.ip = res.action;
+          res_fail2ban.action = 'Already banned';
+        }
         date1 = date1.split(',')[0];
         [, type] = af.split('.');
 

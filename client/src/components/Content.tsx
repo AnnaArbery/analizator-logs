@@ -3,6 +3,7 @@ import { Table, TableColumnsType, TableProps } from 'antd';
 import logServerType from '../types/logServerType.ts';
 import useColumnsTable from '../hooks/useColumnsTable.ts';
 import Panel from './Panel.tsx';
+import Charts from './Charts/Charts.tsx';
 
 type ContentProps = {
   list: logServerType[];
@@ -35,6 +36,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   return (
     <div className='content'>
       <div className='grid'>
+        <Charts list={list} />
         <Panel
           countList={list.length}
           countFiltered={countFiltered}

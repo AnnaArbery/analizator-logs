@@ -2,29 +2,7 @@ Oct 29 09:54:32 server-nl-2-540327-524936 systemd[1]: /etc/systemd/system/xray.s
 Oct 29 09:54:32 server-nl-2-540327-524936 systemd[1]: Started xray.service - Xray Service.
 Oct 29 09:54:32 server-nl-2-540327-524936 xray[4868]: Xray 24.9.30 (Xray, Penetrates Everything.) 3b06af8 (go1.23.1 linux/amd64)
 Oct 29 09:54:32 server-nl-2-540327-524936 xray[4868]: A unified platform for anti-censorship.
-Oct 29 09:54:32 server-nl-2-540327-524936 xray[4868]: 2024/10/29 09:54:32 [Info] infra/conf/serial: Reading config: &{Name:/usr/local/etc/xray/config.json Format:json}
 Oct 29 09:54:32 server-nl-2-540327-524936 xray[4868]: 2024/10/29 09:54:32 [Warning] core: Xray 24.9.30 started
-Oct 29 09:54:32 server-nl-2-540327-524936 systemd[1]: /etc/systemd/system/xray.service:7: Special user nobody configured, this is not safe!
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: Stopping xray.service - Xray Service...
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: xray.service: Deactivated successfully.
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: Stopped xray.service - Xray Service.
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: Started xray.service - Xray Service.
-Oct 29 10:18:04 server-nl-2-540327-524936 xray[5259]: Xray 24.9.30 (Xray, Penetrates Everything.) 3b06af8 (go1.23.1 linux/amd64)
-Oct 29 10:18:04 server-nl-2-540327-524936 xray[5259]: A unified platform for anti-censorship.
-Oct 29 10:18:04 server-nl-2-540327-524936 xray[5259]: Failed to start: main: failed to create server > app/log: failed to initialize access logger > open /root/xray_log/access.log: permission denied
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: xray.service: Main process exited, code=exited, status=23/n/a
-Oct 29 10:18:04 server-nl-2-540327-524936 systemd[1]: xray.service: Failed with result 'exit-code'.
-Oct 29 10:19:07 server-nl-2-540327-524936 systemd[1]: Started xray.service - Xray Service.
-Oct 29 10:19:07 server-nl-2-540327-524936 xray[5269]: Xray 24.9.30 (Xray, Penetrates Everything.) 3b06af8 (go1.23.1 linux/amd64)
-Oct 29 10:19:07 server-nl-2-540327-524936 xray[5269]: A unified platform for anti-censorship.
-Oct 29 10:19:07 server-nl-2-540327-524936 xray[5269]: Failed to start: main: failed to load config files: [/usr/local/etc/xray/config.json] > infra/conf/serial: failed to decode config: &{Name:/usr/local/etc/xray/config.json Format:json} > infra/conf/serial: failed to read config file at line 4 char 4 > invalid character '}' looking for beginning of object key string
-Oct 29 10:19:07 server-nl-2-540327-524936 systemd[1]: xray.service: Main process exited, code=exited, status=23/n/a
-Oct 29 10:19:07 server-nl-2-540327-524936 systemd[1]: xray.service: Failed with result 'exit-code'.
-Oct 29 10:20:02 server-nl-2-540327-524936 systemd[1]: Started xray.service - Xray Service.
-Oct 29 10:20:02 server-nl-2-540327-524936 xray[5332]: Xray 24.9.30 (Xray, Penetrates Everything.) 3b06af8 (go1.23.1 linux/amd64)
-Oct 29 10:20:02 server-nl-2-540327-524936 xray[5332]: A unified platform for anti-censorship.
-Oct 29 10:20:02 server-nl-2-540327-524936 xray[5332]: 2024/10/29 10:20:02 [Info] infra/conf/serial: Reading config: &{Name:/usr/local/etc/xray/config.json Format:json}
-Oct 29 10:20:02 server-nl-2-540327-524936 xray[5332]: 2024/10/29 10:20:02 [Warning] core: Xray 24.9.30 started
 Oct 29 10:22:25 server-nl-2-540327-524936 xray[5332]: 2024/10/29 10:22:25 from 62.217.160.2:9100 accepted tcp:cp.cloudflare.com:80 [vless_tls >> direct] email: user@privserv.com
 Oct 29 10:23:00 server-nl-2-540327-524936 xray[5332]: 2024/10/29 10:23:00 from 62.217.160.2:50016 accepted tcp:8.8.4.4:443 [vless_tls >> direct] email: user@privserv.com
 Oct 29 10:23:00 server-nl-2-540327-524936 xray[5332]: 2024/10/29 10:23:00 from 62.217.160.2:38124 accepted tcp:8.8.4.4:443 [vless_tls >> direct] email: user@privserv.com

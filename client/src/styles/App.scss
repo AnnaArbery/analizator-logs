@@ -70,3 +70,16 @@ footer {
   padding: 4px 11px !important;
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+.charts {
+  .ant-card {
+    &:nth-child(1) {
+      width: calc(65% - 10px);
+    }
+
+    &:nth-child(2) {
+      width: calc(35% - 10px);
+    }
+
+  }
+}
