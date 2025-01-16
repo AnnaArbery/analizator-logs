@@ -17,6 +17,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     TableColumnsType<logServerType>,
     (filters: { [key: string]: string[] }) => void
   ];
+  const [typeChart, setTypeChart] = useState<number>(0);
 
   const onChange: TableProps<logServerType>['onChange'] = (
     pagination,
@@ -36,25 +37,31 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   return (
     <div className='content'>
       <div className='grid'>
-        <Charts list={list} />
+        <Charts list={list} typeChart={typeChart} />
         <Panel
           countList={list.length}
           countFiltered={countFiltered}
           clearFilters={clearFilters}
+          typeChart={typeChart}
+          handlerTypeChart={setTypeChart}
         />
 
-        <Table<logServerType>
-          dataSource={list}
-          columns={columns}
-          pagination={{
-            pageSizeOptions: ['30', '50', '100'],
-            pageSize: count,
-            onChange: (_, pageSize) => setCount(pageSize),
-          }}
-          scroll={{ y: 55 * 12 }}
-          bordered
-          onChange={onChange}
-        />
+        <div className='tableWrap'>
+          <div className='tableContent'>
+            <Table<logServerType>
+              dataSource={list}
+              columns={columns}
+              pagination={{
+                pageSizeOptions: ['30', '50', '100'],
+                pageSize: count,
+                onChange: (_, pageSize) => setCount(pageSize),
+              }}
+              scroll={{ y: 55 * 12 }}
+              bordered
+              onChange={onChange}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

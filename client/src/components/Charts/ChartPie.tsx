@@ -22,7 +22,7 @@ ChartJS.register(
 
 const titles: Record<string, string[]> = {
   xray: ['Пользователи', 'Пользователь'],
-  'Серверные логи': ['Статусы', 'Статус'],
+  Серверные: ['Статусы', 'Статус'],
   fail2ban: ['Действия', 'Действие'],
 };
 
@@ -31,7 +31,7 @@ type chartDataProps = Record<string, { count: number; field: string }>;
 const fields: Record<string, string> = {
   xray: 'user',
   fail2ban: 'action',
-  'Серверные логи': 'status',
+  Серверные: 'status',
 };
 
 const createListPie = (
@@ -53,8 +53,6 @@ const createListPie = (
   });
 
   let count = Object.keys(result).map((value) => result[value].count);
-
-  console.log(result);
 
   return [count, Object.keys(result)];
 };

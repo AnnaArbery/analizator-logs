@@ -1,40 +1,12 @@
 import { Flex } from 'antd';
-import type { MenuProps } from 'antd';
-import { useContext } from 'react';
-import LogsContext from '../context/logsContext';
-
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: (
-      <a
-        target='_blank'
-        rel='noopener noreferrer'
-        href='https://www.antgroup.com'
-      >
-        Серверные логи
-      </a>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <a
-        target='_blank'
-        rel='noopener noreferrer'
-        href='https://www.aliyun.com'
-      >
-        journalctl
-      </a>
-    ),
-  },
-];
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 const Header = ({ title }: { title: string }) => {
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 420px)');
   return (
     <header>
       <div className='grid'>
-        <Flex justify='space-between' align='center'>
+        <Flex justify='space-between' align='center' vertical={isSmallDevice}>
           <h1>Анализатор логов</h1>
           <div className='ant-btn css-var-r0 ant-btn-default ant-btn-color-default ant-btn-variant-outlined header-button'>
             {title}

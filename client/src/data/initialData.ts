@@ -1,5 +1,5 @@
 export const logsList = [
-  { label: 'Серверные логи', value: 'server' },
+  { label: 'Серверные', value: 'server' },
   { label: 'fail2ban', value: 'fail2ban' },
   { label: 'xray', value: 'xray' },
 ];
@@ -21,7 +21,7 @@ const fieldsLogsServer = [
 
 export const initLogSettings = {
   server: {
-    title: 'Серверные логи',
+    title: 'Серверные',
     fields: ['site', ...fieldsLogsServer],
     file: 'site-access_log.log',
     columns: 'columnsTitlesServerLog.json',

@@ -28,7 +28,23 @@ body {
 }
 
 header {
-  padding: 30px;
+  padding: 30px 0;
+
+  @media screen and (max-width: 420px) {
+    padding: 15px 0;
+  }
+
+  h1 {
+    margin-bottom: 0;
+
+    @media screen and (max-width: 768px) {
+      font-size: 24px
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 footer {
@@ -39,13 +55,50 @@ footer {
   cursor: default;
 }
 
-
 .tableSettings {
   margin-bottom: 20px;
 
   .ant-card-body {
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: 360px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .tableCount {
+    @media screen and (max-width: 360px) {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.ant-card .ant-card-body {
+  @media screen and (max-width: 768px) {
+    padding: 15px;
+  }
+
+  @media screen and (max-width: 360px) {
+    padding: 8px;
+  }
+}
+
+.tableWrap {
+  @media screen and (max-width: 1280px) {
+    width: calc(100vw - 60px);
+    overflow-x: scroll;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: calc(100vw - 40px);
+  }
+}
+
+.tableContent {
+  @media screen and (max-width: 1280px) {
+    width: 1240px;
   }
 }
 
@@ -72,13 +125,44 @@ footer {
 }
 
 .charts {
-  .ant-card {
-    &:nth-child(1) {
-      width: calc(65% - 10px);
-    }
+  margin-bottom: 20px;
 
-    &:nth-child(2) {
-      width: calc(35% - 10px);
+  &.ant-flex {
+    @media screen and (max-width: 560px) {
+      flex-direction: column !important;
+    }
+  }
+}
+
+.chartWrap {
+
+  @media screen and (max-width: 560px) {
+    max-width: calc(100vw - 40px);
+  }
+
+  &:nth-child(1) {
+    width: calc(65% - 10px);
+
+    @media screen and (max-width: 560px) {
+      width: 100%
+    }
+  }
+
+  &:nth-child(2) {
+    width: calc(35% - 10px);
+
+    @media screen and (max-width: 560px) {
+      width: 100%
+    }
+  }
+}
+
+.ant-tabs-content-holder {
+  .ant-radio-button-wrapper {
+    span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
   }
