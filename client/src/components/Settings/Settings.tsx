@@ -4,6 +4,7 @@ import LogsContext from '../../context/logsContext';
 import { logsList, initLogSettings } from '../../data/initialData';
 import ListColumnsFile from './ListColumnsFile';
 import ListColumnsTable from './ListColumnsTable';
+import InputLoadFile from './InputLoadFile';
 
 type SettingsProps = {
   isModalOpen: boolean;
@@ -93,6 +94,7 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
+          <InputLoadFile setFile={setFile} />
           <Input
             value={file}
             onChange={(e) => {

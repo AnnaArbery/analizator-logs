@@ -10,7 +10,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { useState } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -36,7 +35,7 @@ const months = [
   'дек',
 ];
 
-const createDateTitle = (date) => {
+const createDateTitle = (date: number) => {
   return new Intl.DateTimeFormat('ru-RU', {
     year: 'numeric',
     month: 'numeric',
@@ -62,7 +61,9 @@ const ChartDate = ({ list, type }: { list: logServerType[]; type: string }) => {
       chartData.set(id, {
         count: 0,
         date: `${day} ${months[month]} ${year}г.`,
-        hour: `${hours} чac, ${day}.${month < 10 ? '0' + month : month}`,
+        hour: `${hours} чac, ${day < 10 ? '0' + day : day}.${
+          month < 10 ? '0' + month : month
+        }`,
       });
     }
     let current = chartData.get(id);

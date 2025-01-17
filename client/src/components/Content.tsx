@@ -17,7 +17,7 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
     TableColumnsType<logServerType>,
     (filters: { [key: string]: string[] }) => void
   ];
-  const [typeChart, setTypeChart] = useState<number>(0);
+  const [typeChart, setTypeChart] = useState<0 | 1>(0);
 
   const onChange: TableProps<logServerType>['onChange'] = (
     pagination,

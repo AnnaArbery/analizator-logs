@@ -25,6 +25,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@uidotdev/usehooks": "^2.4.1",
     "chart.js": "^4.4.7",
+    "multer": "^1.4.5-lts.1",
     "react-chartjs-2": "^5.3.0"
   }
 }
