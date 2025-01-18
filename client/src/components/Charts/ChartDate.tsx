@@ -52,12 +52,13 @@ const ChartDate = ({ list, type }: { list: logServerType[]; type: string }) => {
     const day = date.getDate();
     const hours = date.getHours();
     const year = date.getFullYear().toString().slice(-2);
-    const month = date.getMonth();
+    let month = date.getMonth();
 
     if (type === 'xray' && value.user === '-') return;
     const id: string = `${day}${hours}`;
 
     if (!chartData.has(id)) {
+      month += 1;
       chartData.set(id, {
         count: 0,
         date: `${day} ${months[month]} ${year}г.`,

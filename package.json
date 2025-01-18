@@ -1,5 +1,5 @@
 {
-  "name": "base-server",
+  "name": "analizator-logs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,6 @@
   "scripts": {
     "server": "nodemon index.js --prefix server",
     "client": "npm run dev --prefix client",
-    "db": "docker-compose up -d",
-    "startAll": "concurrently \"(npm run client)\" \"(npm run server )\" \"(npm run db)\"",
     "start": "concurrently \"(npm run client)\" \"(npm run server )\"",
     "setup": "npm i && npm i --prefix client && npm i --prefix server"
   },
@@ -17,15 +15,5 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.0"
-  },
-  "dependencies": {
-    "@ant-design/icons": "^5.5.2",
-    "@dnd-kit/core": "^6.3.1",
-    "@dnd-kit/modifiers": "^9.0.0",
-    "@dnd-kit/sortable": "^10.0.0",
-    "@uidotdev/usehooks": "^2.4.1",
-    "chart.js": "^4.4.7",
-    "multer": "^1.4.5-lts.1",
-    "react-chartjs-2": "^5.3.0"
   }
 }

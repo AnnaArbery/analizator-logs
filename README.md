@@ -1,4 +1,12 @@
-# Base client + server (express)
+# Приложение для анализа логов: серверных логов, xray, fail2ban
+
+Фронтенд - react+TypeScript, бэкенд - express (без бд), UI - AntDesign
+
+Из файла логов вывести в виде таблицы данные, отфильтровать по нужным полям, а так же визуально отобразить графики по часам и в процентном соотношении нужных полей.
+
+В демонстрационной версии на github используется урезанная ветка с уже разобранными логами в формате json.
+
+## Команды
 
 npm run start  
 npm run server  
@@ -6,19 +14,17 @@ npm run client
 
 ## Переменные окружения
 
-SERVER_PORT=9000  
-VITE_CLIENT_PORT=7000
+Vite - запускается на 7000 (vite.config.ts)
 
-хук useColumnsTable.ts - в хуке компонент, поисмотреть варианты
+**_Общие (при общем запуске)_**
 
-```
-return DropDownFilter({
-  dataIndex,
-  selectedKeys,
-  filters,
-  setSelectedKeys,
-  onPressEnter: onOk,
-  clear: clear,
-  onOk: onOk,
-});
-```
+SERVER_PORT=9000
+
+**_Клиентские_**
+
+VITE_URL_LOG = 'http://localhost:9000/logserver/'  
+VITE_URL_FILE = 'http://localhost:9000/upload/'
+
+**_Серверные (при запуске только сервера - иначе используются общие)_**
+
+SERVER_PORT=9000
