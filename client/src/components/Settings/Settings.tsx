@@ -54,7 +54,7 @@ const Settings = ({
 
     const newOptions = {
       title: initLogSettings[type].title,
-      file,
+      file: initLogSettings[type].file,
       fields: optionsNewFields,
     };
 
@@ -94,9 +94,9 @@ const Settings = ({
             style={{ marginBottom: '10px' }}
             onChange={(e) => setType(e.target.value)}
           />
-          <InputLoadFile setFile={setFile} />
           <Input
             value={file}
+            disabled
             onChange={(e) => {
               if (e.target.value === '') return;
               setFile(e.target.value);

@@ -5,10 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon index.js --prefix server",
-    "client": "npm run dev --prefix client",
-    "start": "concurrently \"(npm run client)\" \"(npm run server )\"",
-    "setup": "npm i && npm i --prefix client && npm i --prefix server"
+    "client": "npm run dev --prefix client"
   },
   "author": "",
   "license": "ISC",

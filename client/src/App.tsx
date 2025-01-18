@@ -17,7 +17,7 @@ function App() {
   const [namesColumns, setNamesColumns] = useState<string[]>([]);
   const [columnsTitlesTable] = useFetch(options.columns) || [];
 
-  const [logs] = useFetchLog(import.meta.env.VITE_URL_LOG, options) || [];
+  const [logs] = useFetchLog(options.file) || [];
 
   useEffect(() => {
     const namesColumns = Object.keys(columnsTitlesTable);

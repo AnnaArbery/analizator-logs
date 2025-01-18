@@ -8,8 +8,6 @@
 
 ## Команды
 
-npm run start  
-npm run server  
 npm run client
 
 ## Переменные окружения

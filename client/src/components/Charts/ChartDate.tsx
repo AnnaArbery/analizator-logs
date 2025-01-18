@@ -77,12 +77,14 @@ const ChartDate = ({ list, type }: { list: logServerType[]; type: string }) => {
       legend: {
         display: false,
       },
-      tooltip: {
-        callbacks: {
-          title: (context: any) =>
-            `${context[0].raw.date} ${context[0].raw.hour}`,
-        },
-      },
+      // tooltip: {
+      //   callbacks: {
+      //     title: (context: any) => {
+      //       console.log(context[0]);
+      //       return `${context[0].raw.date} ${context[0].raw.hour}`;
+      //     },
+      //   },
+      // },
     },
   };
 

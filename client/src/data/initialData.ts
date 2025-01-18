@@ -23,7 +23,7 @@ export const initLogSettings = {
   server: {
     title: 'Серверные',
     fields: ['site', ...fieldsLogsServer],
-    file: 'site-access_log.log',
+    file: 'site-access_log.json',
     columns: 'columnsTitlesServerLog.json',
   },
   fail2ban: {
@@ -41,7 +41,7 @@ export const initLogSettings = {
       'date2',
       'date3',
     ],
-    file: 'fail2ban-logs.log',
+    file: 'fail2ban-logs.json',
     columns: 'columnsTitlesServerLog.json',
   },
   xray: {
@@ -64,7 +64,7 @@ export const initLogSettings = {
       'mm',
       'user',
     ],
-    file: 'xray-log.log',
+    file: 'xray-log.json',
     columns: 'columnsTitlesServerLog.json',
   },
 };
