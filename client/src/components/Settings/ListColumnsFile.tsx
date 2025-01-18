@@ -50,9 +50,10 @@ const SettingsListFields = ({
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id === over?.id || !over?.id) return;
 
+    // @ts-ignore
     setFields((prev) => {
-      const activeIndex = prev.findIndex((name) => name === active.id);
-      const overIndex = prev.findIndex((name) => name === over?.id);
+      const activeIndex = prev.findIndex((name: string) => name === active.id);
+      const overIndex = prev.findIndex((name: string) => name === over?.id);
       return arrayMove(prev, activeIndex, overIndex);
     });
   };

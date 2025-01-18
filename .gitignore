@@ -1,5 +1,4 @@
 **/node_modules
-/mongodata
 *.psd
 *.doc
 *.docx
@@ -7,3 +6,4 @@
 *.rar
 *.env
 /_helps
+/client/dist

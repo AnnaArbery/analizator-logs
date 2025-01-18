@@ -1,5 +1,5 @@
 import { Button, Checkbox, Input } from 'antd';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 
 type DropDownFilterProps = Pick<FilterDropdownProps, 'filters'> & {
