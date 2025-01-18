@@ -19,13 +19,10 @@ const Content = ({ list, columnsTitlesTable }: ContentProps) => {
   ];
   const [typeChart, setTypeChart] = useState<0 | 1>(0);
 
-  const onChange: TableProps<logServerType>['onChange'] = (
-    pagination,
-    filters,
-    sorter,
-    extra
-  ) => {
-    setCountFiltered(extra.currentDataSource.length);
+  const onChange: TableProps<logServerType>['onChange'] = (filters, extra) => {
+    if (extra.currentDataSource) {
+      setCountFiltered(extra.currentDataSource?.length);
+    }
     setFilteredInfo(filters as { [key: string]: string[] });
   };
 

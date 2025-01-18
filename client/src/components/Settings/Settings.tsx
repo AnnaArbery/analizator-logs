@@ -4,7 +4,6 @@ import LogsContext from '../../context/logsContext';
 import { logsList, initLogSettings } from '../../data/initialData';
 import ListColumnsFile from './ListColumnsFile';
 import ListColumnsTable from './ListColumnsTable';
-import InputLoadFile from './InputLoadFile';
 
 type SettingsProps = {
   isModalOpen: boolean;

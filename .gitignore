@@ -8,3 +8,4 @@
 *.env
 /_helps
 /server
+/dist
