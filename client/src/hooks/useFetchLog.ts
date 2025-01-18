@@ -11,13 +11,7 @@ const useFetch = <T extends []>(
   useEffect(() => {
     (async function fetchData() {
       try {
-        const res = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(options),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        });
+        const res = await fetch(url);
         const json = await res.json();
         setResponse(json);
         setStatus('loaded');
