@@ -174,3 +174,14 @@ footer {
 
   }
 }
+
+.ant-modal {
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.ant-modal-content {
+  max-height: 90vh;
+  overflow: auto;
+
+}
