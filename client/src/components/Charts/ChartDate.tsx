@@ -58,12 +58,11 @@ const ChartDate = ({ list, type }: { list: logServerType[]; type: string }) => {
     const id: string = `${day}${hours}`;
 
     if (!chartData.has(id)) {
-      month += 1;
       chartData.set(id, {
         count: 0,
         date: `${day} ${months[month]} ${year}г.`,
         hour: `${hours} чac, ${day < 10 ? '0' + day : day}.${
-          month < 10 ? '0' + month : month
+          month < 10 ? '0' + month + 1 : month + 1
         }`,
       });
     }
@@ -80,7 +79,7 @@ const ChartDate = ({ list, type }: { list: logServerType[]; type: string }) => {
       tooltip: {
         callbacks: {
           title: (context: any) =>
-            `${context[0].raw.date} ${context[0].raw.hour}`,
+            `${context[0].raw.date}, ${context[0].raw.hour.split(',')[0]}`,
         },
       },
     },
