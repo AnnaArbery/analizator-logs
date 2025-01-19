@@ -7,7 +7,9 @@ const Footer = () => {
         <Flex justify='space-between' align='center'>
           <div>Anna Arbery 2024</div>
           <div>
-            <a href=''>GitHub репозиторий</a>
+            <a href='https://github.com/AnnaArbery/analizator-logs'>
+              GitHub репозиторий
+            </a>
           </div>
         </Flex>
       </div>
